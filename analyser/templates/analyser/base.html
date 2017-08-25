@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/lato.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_css.css' %}">
+    <link rel="stylesheet" href="{% static 'css/analyser.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animation2.css' %}">
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+</head>
+<body id="lato">
+
+<!--Navbar-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="#">Smart Kirana</a>
+
+        </div>
+    </div>
+</nav>
+{% block content %}
+<!--================================
+    ====== Content goes here =======
+    ================================ -->
+{% endblock %}
+</body>
+</html>
