@@ -1,13 +1,53 @@
 {% extends 'analyser/base.html' %}
 {% block title %}
-    SmartKirana
+SmartKirana
 {% endblock %}
 
 {% load static %}
 
 {% block content %}
 
+<br>
+<div class="container-fluid">
+    <h1 align="center" style="color:#A0A0A0;">Provision Store</h1>
 
+    <div class="row">
+        <div class="col-md-8">
+            Items bought:<br>
+            <table>
+                <tr>
+                    <th>ItemName&nbsp;&nbsp;</th>
+                    <th> Price </th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>20.00</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-md-2">
+            <b>Recommended Items:</b><br>
+            <table>
+                {% for recommendedItem in recommendations %}
+                <tr>
+                    <td>{{ recommendedItem }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 
+    <br>
+    <br>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="itemNameInput"/>
+        <input type="submit" value="Add"/>
+    </form>
+
+</div>
 
 {% endblock %}

@@ -1,5 +1,7 @@
-from __future__ import unicode_literals
-
 from django.db import models
 
-# Create your models here.
+
+# Item data model.
+class Item(models.Model):
+    item_name = models.CharField(max_length=100)
+    price = models.FloatField()
