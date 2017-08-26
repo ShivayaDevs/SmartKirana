@@ -115,3 +115,7 @@
     -webkit-transform: scale(1.0);
   }
 }
+
+.big{
+    size: 50px;
+}

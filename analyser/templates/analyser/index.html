@@ -11,30 +11,24 @@ SmartKirana
 <div class="container-fluid">
     <h1 align="center" style="color:#A0A0A0;">Provision Store</h1>
 
+    <h2 style="color:#000080;">Mr. Gupta</h2>
     <div class="row">
         <div class="col-md-8">
-            Items bought:<br>
-            <table>
-                <tr>
-                    <th>ItemName&nbsp;&nbsp;</th>
-                    <th> Price </th>
-                </tr>
-                {% for item in items %}
-                <tr>
-                    <td>{{ item }}</td>
-                    <td>20.00</td>
-                </tr>
-                {% endfor %}
-            </table>
+                Items bought:<br>
+                <table class="table" id="itemsTable">
+                    <tr>
+                        <th>ItemName&nbsp;&nbsp;</th>
+                        <th> Price</th>
+                    </tr>
+                    <!-- Rows will be appended here. -->
+                </table>
         </div>
         <div class="col-md-2">
             <b>Recommended Items:</b><br>
-            <table>
-                {% for recommendedItem in recommendations %}
-                <tr>
-                    <td>{{ recommendedItem }}</td>
-                </tr>
-                {% endfor %}
+            <table >
+                <tbody id="recommendedTable">
+
+                </tbody>
             </table>
         </div>
     </div>
@@ -42,12 +36,39 @@ SmartKirana
     <br>
     <br>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        <input type="text" name="itemNameInput"/>
-        <input type="submit" value="Add"/>
-    </form>
+    <input type="text" class="form-control" value="Sugar" id="itemInput"/>
+    <button onclick="addItem()" class="btn btn-default">Add Item</button>
 
 </div>
 
+<script>
+    function addItem() {
+        var val = $("#itemInput").val();
+        console.log(val);
+        $.ajax({
+            method: 'POST',
+            url: 'ajax/addItem',
+            data: {'newItem': val},
+            success: function (data) {
+                 //this gets called when server returns an OK response
+                console.log(data);
+                var record = '<tr><td>'+ val +'</td><td>'+ data['price'] + '</td></tr>';
+                $('#itemsTable').append(record);
+                setRecommendations(data);
+            },
+            error: function (data) {
+                alert("it didnt work");
+            }
+        });
+    }
+
+    function setRecommendations(data) {
+        var currentRecommendations = $('#recommendedTable').html();
+        console.log('current' + currentRecommendations);
+        var line = '<tr><td>' + data['recommend'] + '</td></tr>';
+        $('#recommendedTable').html(line + currentRecommendations);
+    }
+
+
+</script>
 {% endblock %}
