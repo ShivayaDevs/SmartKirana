@@ -24,24 +24,24 @@ Seller Home
 
             <tr>
                 <td>Today</td>
-                <td class="big">&#8377;200000</td>
-                <td class="big">&#8377;150000</td>
-                <td class="big">&#8377;0.00</td>
-                <td class="big">&#8377;2000.00</td>
+                <td class="big">&#8377;{{today_income}}</td>
+                <td class="big">&#8377;{{today_expenses}}</td>
+                <td class="big">&#8377;{{today_debt}}</td>
+                <td class="big">&#8377;{{today_credits}}</td>
             </tr>
             <tr>
                 <td>This week</td>
-                <td class="big">&#8377;200000</td>
-                <td class="big">&#8377;150000</td>
-                <td class="big">&#8377;0.00</td>
-                <td class="big">&#8377;2000.00</td>
+                <td class="big">&#8377;{{week_income}}</td>
+                <td class="big">&#8377;{{week_expenses}}</td>
+                <td class="big">&#8377;{{week_debt}}</td>
+                <td class="big">&#8377;{{week_credits}}</td>
             </tr>
             <tr>
                 <td>This month</td>
-                <td class="big">&#8377;200000</td>
-                <td class="big">&#8377;150000</td>
-                <td class="big">&#8377;0.00</td>
-                <td class="big">&#8377;2000.00</td>
+                <td class="big">&#8377;{{month_income}}</td>
+                <td class="big">&#8377;{{month_expenses}}</td>
+                <td class="big">&#8377;{{month_debt}}</td>
+                <td class="big">&#8377;{{month_credits}}</td>
             </tr>
         </table>
     </div>
@@ -54,6 +54,32 @@ Seller Home
         <div class="col-md-4">
             <center><b>Churn</b></center>
             Customers lost this month : 2
+            <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Churn metrics'],
+          ['Jan',     11],
+          ['Feb',      2],
+          ['March',  2],
+          ['Jul', 2],
+          ['August',    2]
+        ]);
+
+        var options = {
+          title: 'Customer Retention'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+
+            </script>
+            <div id="piechart" style="width: 300px; height: 300px;"></div>
         </div>
         <div class="col-md-4">
             <center><b>Billing</b></center>
@@ -76,13 +102,16 @@ Seller Home
                 <b>Inventory Alerts:</b>
                 <table>
                     <tr>
-                        <td>Sugar should be ordered before 12th July 2017.</td>
+                        <td>{{ a0 }}</td>
                     </tr>
                     <tr>
-                        <td>Milk should be ordered before 19th July 2017.</td>
+                        <td>{{ a1 }}</td>
                     </tr>
                     <tr>
-                        <td>Powder should be ordered before 14th July 2017.</td>
+                        <td>{{ a2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ a3 }}</td>
                     </tr>
                 </table>
                 <!--</div>-->
