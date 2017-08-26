@@ -48,7 +48,16 @@ def seller_home(request):
         'month_debt' : 200.0,
         'month_credits' : 4000.0,
     }
-    for i in range(0, 6):
-        context['a'+str(i)] = dictionary[i] + ' will last for ' + str(time_series_predictor.predict(dictionary[i])) + ' more days'
 
+    dic = {}
+    for i in range(0, 6):
+        dic[dictionary[i]] = time_series_predictor.predict(dictionary[i])
+
+    import operator
+    dic = sorted(dic.items(), key=operator.itemgetter(1))
+
+    index = 0
+    for k,v in dic:
+        context['a'+str(index)] = str(k) + ' will last for ' + str(v) + ' more days!'
+        index = index + 1
     return render(request, 'analyser/home.html', context)
